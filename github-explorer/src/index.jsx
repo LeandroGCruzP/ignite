@@ -1,3 +1,5 @@
+import { App } from './App'
+
 export function Home() {
-  return <h1>Hello World</h1>
+  return <App />
 }
