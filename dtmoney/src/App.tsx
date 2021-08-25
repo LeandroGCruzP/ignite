@@ -6,6 +6,8 @@ import { Dashboard } from './components/Dashboard'
 
 import { GlobalStyle } from './styles/global'
 
+Modal.setAppElement('#root')  // Acesibilidade
+
 export function App() {
   const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(false)
 
