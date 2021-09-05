@@ -1,11 +1,13 @@
 import Modal from 'react-modal'
 import { useState } from 'react'
 
+import { TransactionContext } from './context/TransactionContext'
+
 import { Header } from './components/Header'
 import { Dashboard } from './components/Dashboard'
+import { NewTransactionModal } from './components/NewTransactionModal'
 
 import { GlobalStyle } from './styles/global'
-import { NewTransactionModal } from './components/NewTransactionModal'
 
 Modal.setAppElement('#root') // Acesibilidade
 
@@ -22,7 +24,7 @@ export function App() {
   }
 
   return (
-    <>
+    <TransactionContext.Provider value={[]}>
       <Header onOpenNewTransactionModal={handleOpenNewTransactionModal} />
       <Dashboard />
 
@@ -32,6 +34,6 @@ export function App() {
       />
 
       <GlobalStyle />
-    </>
+    </TransactionContext.Provider>
   )
 }
