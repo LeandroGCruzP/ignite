@@ -27,7 +27,7 @@ interface TransactiopnProviderProps {
 
 interface TransactionsContextData {
   transactions: Transaction[]
-  createTransaction: (transaction: TransactionForm) => void
+  createTransaction: (transaction: TransactionForm) => Promise<void>
 }
 
 /** Hack para arrumar erro de TS
@@ -47,8 +47,17 @@ export function TransactionProvider({ children }: TransactiopnProviderProps) {
       .then((response) => setTransactions(response.data.transactions))
   }, [])
 
-  function createTransaction(transaction: TransactionForm) {
-    api.post('/transaction', transaction)
+  async function createTransaction(transactionForm: TransactionForm) {
+    const response = await api.post('/transaction', {
+      ...transactionForm,
+      createdAt: new Date()
+    })
+
+    const { transaction } = response.data
+    setTransactions([
+      ...transactions,
+      transaction
+    ])
   }
 
   return (
