@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useEffect, useState } from 'react'
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import { api } from '../services/api'
 
 interface Transaction {
@@ -34,7 +34,7 @@ interface TransactionsContextData {
  * {} as TransactionsContextData é um jeito de arrumar o erro
  * isto força ao TS dizendo que {} é do formato TransactionsContextData
  */
-export const TransactionContext = createContext<TransactionsContextData>(
+const TransactionContext = createContext<TransactionsContextData>(
   {} as TransactionsContextData
 )
 
@@ -65,4 +65,10 @@ export function TransactionProvider({ children }: TransactiopnProviderProps) {
       {children}
     </TransactionContext.Provider>
   )
+}
+
+export function useTransactions() {
+  const context = useContext(TransactionContext)
+
+  return context
 }
